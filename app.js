@@ -10,7 +10,7 @@ let PORT = process.env.PORT || 2000;
 let app = express();
 
 // ! the URI to connect to DB
-const cloudDbUri  = proceess.env.MONGODBURI;
+const cloudDbUri  = process.env.MONGODBURI;
 const localDbUri = "mongodb://127.0.0.1:27017/appdb" ;
 
 
