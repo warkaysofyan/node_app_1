@@ -1,3 +1,4 @@
+require('dotenv').config();
 const mongoose = require('mongoose');
 let Schema = mongoose.Schema;
 
@@ -21,20 +22,31 @@ let usersSchema = new Schema({
     }
 })
 
-usersSchema.path("userName").validate(async (userName)=>{
-    let usersCount = await mongoose.models.user.countDocuments({userName})
-    return !usersCount;
-},"username alredy registerd");
 
-usersSchema.path("email").validate(async(email)=>{
-    let emailCont = await mongoose.models.user.countDocuments({email});
-    return !emailCont;
-},"email alredy registerd");
 
-usersSchema.path("phoneNumber").validate(async(phoneNumber)=>{
-    let phoneNumberCount = await mongoose.models.user.countDocuments({phoneNumber});
-    return !phoneNumberCount;
-},"phone number alredy registers");
+
+async function run() {
+    await mongoose.connect(process.env.MONGODBURI);
+  
+    usersSchema.path("userName").validate(async (userName)=>{
+        let usersCount = await mongoose.models.user.countDocuments({userName})
+        return !usersCount;
+    },"username alredy registerd");
+    
+    usersSchema.path("email").validate(async(email)=>{
+        let emailCont = await mongoose.models.user.countDocuments({email});
+        return !emailCont;
+    },"email alredy registerd");
+    
+    usersSchema.path("phoneNumber").validate(async(phoneNumber)=>{
+        let phoneNumberCount = await mongoose.models.user.countDocuments({phoneNumber});
+        return !phoneNumberCount;
+    },"phone number alredy registers");
+
+
+}
+
+run()
 
 let User = mongoose.model("user",usersSchema); 
 
