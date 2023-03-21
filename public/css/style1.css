@@ -1,0 +1,121 @@
+* {
+  padding: 0;
+  margin: 0;
+  box-sizing: 0;
+  font-family: sans-serif;
+}
+:focus {
+  outline: 0;
+}
+/* body {
+  background-color: #34ace0;
+} */
+.sofInp {
+  height: 50px;
+  width: 500px;
+  border-radius: 10px;
+  border: none;
+  font-size: 1.5rem;
+  border: 3px solid #2c2c54;
+  background-color: transparent;
+  padding: 0 10px;
+}
+.containerA {
+  position: relative;
+}
+label {
+  cursor: pointer;
+  display: block;
+  margin: 0 20px;
+  position: absolute;
+  top: 9px;
+  font-size: 1.4rem;
+  transition: 250ms all;
+  color: #555;
+  font-weight: 900;
+}
+.lable {
+  top: -6px;
+  font-size: 1.1rem;
+  background-color: white;
+  padding: 0 10px 0 0;
+  border-left: 1.5px solid #2c2c54;
+  color: #2c2c54;
+  display: flex;
+  align-items: center;
+  height: 16px;
+}
+.icon {
+  font-size: 1.9rem;
+  position: relative;
+  left: -5px;
+}
+.container {
+  height: 100vh !important;
+  width: 100% !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: space-around !important;
+  flex-direction: column !important;
+}
+.container1 {
+  background-color: white;
+  padding: 40px;
+  border-radius: 7px;
+  box-shadow: 0px 0px 20px 0px #ed505b;
+}
+form {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  row-gap: 30px;
+}
+.Icontainer {
+  align-self: flex-start;
+  display: flex;
+  flex-direction: column;
+  row-gap: 30px;
+}
+.Icontainer > input {
+  align-self: flex-start;
+  height: 50px;
+  width: 170px;
+  background-color: #54af5b;
+  border: none;
+  border-radius: 7px;
+}
+.coder {
+  font-family: "Kalam", cursive;
+}
+.warn {
+  color: red;
+  position: absolute;
+  right: 15px;
+}
+.arrow-icon {
+  position: relative;
+  top: 2.5px;
+  right: 2.5px;
+}
+.icon1 {
+  color: red;
+  position: absolute;
+  right: 0;
+  top: 0px;
+  height: 50px;
+  width: 50px;
+  display: grid;
+  place-items: center;
+}
+.icon1 > * {
+  font-size: large;
+}
+#submitBtn {
+  transition: 200ms all;
+  width: 150px;
+  height: 50px;
+}
+.moved {
+  transform: translateX(190px);
+}
