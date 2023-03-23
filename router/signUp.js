@@ -1,30 +1,30 @@
 const express = require("express");
 let router =  express.Router();
 let User = require('./../models/users');
-let bcrypt = require('bcrypt');
+const jwt = require('jsonwebtoken');
 
+let maxAge = 3*24*60*60;
 
+function createToken(id){
+    return jwt.sign({id},"dadasafa",{expiresIn:maxAge})
+}
 
 router.get('/',(rea,res)=>{
     let data = { title:"Sign Up" , style : "css/style.css", active : "" } ;
+    if(req.logged){
+        data.layout="layouts/loggedInLayout"
+    }
     res.render("signup",data)
-})
-
-router.post('/',(req,res,next)=>{
-
-    bcrypt.hash(req.body.password,10).then((pass)=>{
-        req.body.password = pass;
-        next();
-    }); 
 })
 
 
 router.post('/',(req,res)=>{
-    console.log(req.body)
     let user = new User(req.body)
     
-    user.save().then(()=>{
+    user.save().then((created)=>{
         console.log('user created');
+        let token = createToken(created._id);
+        res.cookie("jwt",token,{httpOnly:true,maxAge:maxAge*1000});
         res.json({error:true,errors:"no Errors"});
     }).catch((err)=>{
         console.log(err);

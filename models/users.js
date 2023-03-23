@@ -1,7 +1,10 @@
+require('dotenv').config();
 const mongoose = require('mongoose');
 let Schema = mongoose.Schema;
+let bcrypt = require('bcrypt');
 
-require('dotenv').config();
+// ! database connection function 
+
 async function Connect() {
     await mongoose.connect(process.env.MONGODBURI);
 }
@@ -23,12 +26,37 @@ let usersSchema = new Schema({
     },password:{
         type:String,
         reaquired:true,
-        unique:true
     }
 })
 
 
+usersSchema.pre('save',async function(next){
+    let salt = await bcrypt.genSalt() ;
+    this.password = await bcrypt.hash(this.password , salt) ;
+    next() 
+})
 
+usersSchema.statics.login = async function(inp1,password){
+    Connect()
+    let user1 = await this.findOne({userName:inp1});
+    let user2 = await this.findOne({email:inp1});
+    if(user1||user2){
+        let user = user1 || user2;
+        const auth = await bcrypt.compare(password,user.password);
+        if(auth){
+            return {
+                sucsess:true,
+                response:user
+            };
+        }else{return {
+            sucsess:false,
+            response:"ERR2"
+        }}
+    }else{return {
+        sucsess:false,
+        response:"ERR1"
+    }}
+}
 
     usersSchema.path("userName").validate(async (userName)=>{
         Connect()
@@ -48,6 +76,7 @@ let usersSchema = new Schema({
         return !phoneNumberCount;
     },"phone number alredy registers");
 
+    
 
 
 

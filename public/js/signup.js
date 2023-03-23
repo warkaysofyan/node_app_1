@@ -8,9 +8,12 @@ let spenning = `
         Loading...
     </button>
 `
+
 let normalBtn = `
-<input type="button" class="btn btn-success" id="submitBtn" value="Sign Up" />
+<input type="button" class="btn btn-success" id="submitBtn" value="done" />
 `
+
+let previousBtn = `<input type="button" class="btn btn-info" id="submitBtn" value="Sign Up" />`
 
 let submitBtn = document.querySelector('#submitBtn');
 let submitBtnContainer = document.querySelector('#submitBtnContainer');
@@ -105,7 +108,7 @@ for(let i = 0 ;i<=4;i++){
     })
 }
 
-submitBtn.addEventListener('click',()=>{
+submitBtnContainer.addEventListener('click',()=>{
     if(checkInteries()){
     submitBtnContainer.innerHTML = spenning ;
     axios.post('/signUp', {
@@ -116,17 +119,20 @@ submitBtn.addEventListener('click',()=>{
     })
     .then(function (r) {
         let errdata = r.data.errors.errors;
+
         if(!r.data.error){
             for (const key in errdata) {
                 document.querySelector("." + key).innerHTML =arrowing + errdata[key].message;
             }
-            submitBtnContainer.innerHTML = normalBtn ;
+            submitBtnContainer.innerHTML = previousBtn ;
         }
         else if(r.data.error){
-            console.log("user Created")
+            console.log("user Created");
             warns[0]();
             warns[1]();
             warns[2]();
+            submitBtnContainer.innerHTML = normalBtn ;
+            window.location = "/profile"
         }
     })
     }

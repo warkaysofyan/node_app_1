@@ -119,3 +119,15 @@ form {
 .moved {
   transform: translateX(190px);
 }
+.eye {
+  position: relative;
+  right: 40px;
+  top: 3px;
+  cursor: pointer;
+  color: blue;
+  user-select: none;
+}
+.alert {
+  width: 80%;
+  display: none;
+}

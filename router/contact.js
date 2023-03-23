@@ -4,6 +4,11 @@ const Blog = require('./../models/blog');
 
 router.get("/",(req,res)=>{
     let data =   {title:"Contact Us " , style:"css/style.css",active:"contact",isLoged:false };
+    
+    if(req.logged){
+        data.layout="layouts/loggedInLayout"
+    }
+
     const blog = new Blog({
         title:"sofyan",
         snippet:"sofyan",

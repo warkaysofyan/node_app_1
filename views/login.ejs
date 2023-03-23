@@ -4,16 +4,20 @@
   <div class="container1">
     <form action="">
       <h1>Login With You Account</h1>
+      <div class="alert alert-danger" id="alertMsg" role="alert"></div>
       <div class="Icontainer">
         <div class="containerA">
           <input id="inp1" class="sofInp" type="text" />
-          <label for="inp1" id="lInp1">User Name : </label>
+          <label for="inp1" id="lInp1">Username or Email : </label>
         </div>
         <div class="containerA">
           <input id="inp2" class="sofInp" type="password" />
           <label for="inp2" id="lInp2">Password : </label>
+          <span class="material-symbols-outlined eye" id="eye">
+            visibility
+          </span>
         </div>
-        <input type="button" value="connect" />
+        <input type="button" id="submitBtn" value="connect" />
       </div>
     </form>
   </div>
